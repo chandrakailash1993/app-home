@@ -5,8 +5,8 @@ const NextFederationPlugin = require("@module-federation/nextjs-mf");
 const remotes = (isServer) => {
   const location = isServer ? "ssr" : "chunks";
   return {
-    product: `product@http://localhost:3002/_next/static/${location}/remoteEntry.js`,
-    shell: `shell@http://localhost:3001/_next/static/${location}/remoteEntry.js`,
+    product: `product@${process.env.PRODUCT_APP_ENDPOINT}/_next/static/${location}/remoteEntry.js`,
+    shell: `shell@${process.env.SHELL_APP_ENDPOINT}/_next/static/${location}/remoteEntry.js`,
   };
 };
 
