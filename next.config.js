@@ -5,12 +5,24 @@ const NextFederationPlugin = require("@module-federation/nextjs-mf");
 const remotes = (isServer) => {
   const location = isServer ? "ssr" : "chunks";
   return {
-    product: `product@${process.env.NEXT_PRODUCT_APP_ENDPOINT}/_next/static/${location}/remoteEntry.js`,
-    shell: `shell@${process.env.NEXT_SHELL_APP_ENDPOINT}/_next/static/${location}/remoteEntry.js`,
+    product: `product@${process.env.NEXT_PUBLIC_PRODUCT_APP_ENDPOINT}/_next/static/${location}/remoteEntry.js`,
+    shell: `shell@${process.env.NEXT_PUBLIC_SHELL_APP_ENDPOINT}/_next/static/${location}/remoteEntry.js`,
   };
 };
 
 const nextConfig = {
+  serverRuntimeConfig: {
+    NEXT_PUBLIC_HOME_APP_ENDPOINT: process.env.NEXT_PUBLIC_HOME_APP_ENDPOINT,
+    NEXT_PUBLIC_SHELL_APP_ENDPOINT: process.env.NEXT_PUBLIC_SHELL_APP_ENDPOINT,
+    NEXT_PUBLIC_PRODUCT_APP_ENDPOINT:
+      process.env.NEXT_PUBLIC_PRODUCT_APP_ENDPOINT,
+  },
+  publicRuntimeConfig: {
+    NEXT_PUBLIC_HOME_APP_ENDPOINT: process.env.NEXT_PUBLIC_HOME_APP_ENDPOINT,
+    NEXT_PUBLIC_SHELL_APP_ENDPOINT: process.env.NEXT_PUBLIC_SHELL_APP_ENDPOINT,
+    NEXT_PUBLIC_PRODUCT_APP_ENDPOINT:
+      process.env.NEXT_PUBLIC_PRODUCT_APP_ENDPOINT,
+  },
   webpack(config, options) {
     config.plugins.push(
       new NextFederationPlugin({
