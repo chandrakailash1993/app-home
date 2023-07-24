@@ -12,8 +12,8 @@ const Home = ({ pokemonList }) => {
     <div className="pokemon">
       <div className="row">
         {pokemonList?.map((pokemon) => (
-          <div className="col">
-            <PokemonItem {...pokemon} key={pokemon.id} />
+          <div className="col" key={pokemon.id}>
+            <PokemonItem {...pokemon} />
           </div>
         ))}
       </div>
